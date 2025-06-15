@@ -7,7 +7,6 @@ import BugReportingForm from './components/form';
 
 function App() {
   return (
-    <BrowserRouter>
     <>
       <Header />
       <Routes>
@@ -16,7 +15,7 @@ function App() {
         <Route path="/newbug" element={<BugReportingForm />} />
       </Routes>
       <Footer />
-    </></BrowserRouter>
+    </>
   );
 }
 
