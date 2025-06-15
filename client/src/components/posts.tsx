@@ -27,7 +27,6 @@ const PostDetail = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
   <div className="max-w-4xl mx-auto px-4 py-12 ">
-    {/* Back Button */}
     <div className="mb-8">
       <Link 
         to="/" 
@@ -61,7 +60,6 @@ const PostDetail = () => {
                     }</span>
                   </div>
 
-    {/* Image */}
     <div className="relative rounded-2xl overflow-hidden border border-gray-700/50 shadow-xl mb-10">
       <div className="relative pt-[50%]">
         <img 
@@ -73,7 +71,6 @@ const PostDetail = () => {
       </div>
     </div>
 
-    {/* Solution Content */}
     <div className="prose prose-invert max-w-none prose-lg prose-headings:text-cyan-300 prose-a:text-purple-400 hover:prose-a:text-purple-300 prose-strong:text-cyan-200 prose-blockquote:text-gray-400 prose-code:bg-gray-800 prose-code:px-2 prose-code:py-1 prose-code:rounded-lg border border-gray-800 rounded-2xl p-8 bg-gray-800/20 backdrop-blur-sm">
       <div dangerouslySetInnerHTML={{ __html: post.solution }} />
     </div>

@@ -30,7 +30,6 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between py-4">
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {["Home", "Bugs & Solutions", "About"].map((item) => (
               <a
@@ -44,7 +43,6 @@ const Header: React.FC = () => {
             ))}
           </div>
 
-          {/* CTA & Mobile Menu */}
           <div className="flex items-center space-x-4">
             <button
               onClick={form}
@@ -61,7 +59,6 @@ const Header: React.FC = () => {
           </div>
         </nav>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="lg:hidden mt-4 pb-4">
             <div className="space-y-2">
