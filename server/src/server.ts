@@ -3,9 +3,10 @@ import express from 'express';
 import multer from 'multer';
 import pkg from 'pg';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
+import dotenv from 'dotenv';
 const __dirname = path.resolve();
+
+dotenv.config()
 
 const { Pool } = pkg;
 const app = express();
@@ -13,8 +14,8 @@ const PORT = 3000;
 
 const corsOptions = {
   origin: [
-    'http://localhost:5173',  // Remove trailing slash
-    'http://localhost:5173/', // Keep this as backup
+    'http://localhost:5173',  
+    'http://localhost:5173/', 
   ],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -22,18 +23,49 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 app.use(cors(corsOptions));
+dotenv.config();
+
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'Azbug',
-  password: 'Ugwuanyi1?',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
+
+
+
+// ✅ TEMPORARY DB SETUP ROUTE
+app.get('/init-db', async (req, res) => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS azbug (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        solution TEXT NOT NULL,
+        image TEXT,
+        username TEXT,
+        created TIMESTAMP DEFAULT NOW()
+      );
+    `);
+    res.send('✅ Table created successfully');
+  } catch (err) {
+    console.error('❌ Error creating table:', err);
+    if (err instanceof Error) {
+      res.status(500).send('Error: ' + err.message);
+    } else {
+      res.status(500).send('An unknown error occurred');
+    }
+  }
+});
+
+// ... your other routes and app.listen() go below
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
