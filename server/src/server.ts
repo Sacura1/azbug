@@ -39,6 +39,34 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 
+
+
+// ✅ TEMPORARY DB SETUP ROUTE
+app.get('/init-db', async (req, res) => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS azbug (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        solution TEXT NOT NULL,
+        image TEXT,
+        username TEXT,
+        created TIMESTAMP DEFAULT NOW()
+      );
+    `);
+    res.send('✅ Table created successfully');
+  } catch (err) {
+    console.error('❌ Error creating table:', err);
+    if (err instanceof Error) {
+      res.status(500).send('Error: ' + err.message);
+    } else {
+      res.status(500).send('An unknown error occurred');
+    }
+  }
+});
+
+// ... your other routes and app.listen() go below
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, 'uploads'));
