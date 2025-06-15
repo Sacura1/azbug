@@ -19,7 +19,7 @@ const Home: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/getPosts")
+        axios.get(`${import.meta.env.VITE_API_URL}/getPosts`)
             .then(response => {
                 setPosts(response.data);
                 console.log("Fetched posts:", response.data);

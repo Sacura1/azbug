@@ -17,7 +17,7 @@ const PostDetail = () => {
   const [post, setPost] = useState<Post | null>(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/posts/${id}`)
+    axios.get(`${import.meta.env.VITE_API_URL}/posts/${id}`)
       .then(res => setPost(res.data))
       .catch(err => console.error('Error fetching post:', err));
   }, [id]);

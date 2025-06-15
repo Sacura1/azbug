@@ -41,13 +41,12 @@ const BugReportingForm: React.FC = () => {
   formDataToSend.append("solution", formData.solution);
   formDataToSend.append("username", formData.username);
 
-  // ✅ Append image file correctly
   if (formData.issueImage) {
     formDataToSend.append("issueImage", formData.issueImage);
   }
 
   try {
-    const response = await axios.post("http://localhost:3000/submit", formDataToSend, {
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/submit`, formDataToSend, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
