@@ -44,6 +44,8 @@ const Header: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-4">
+            <h1 className="text-white" >Azbug</h1>
+            <img className="w-11 h-11" src="./azbug.png" alt="" />
             <button
               onClick={form}
               className="hidden md:block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -71,8 +73,9 @@ const Header: React.FC = () => {
                   {item}
                 </a>
               ))}
-              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-4 rounded-lg mt-4 hover:from-blue-600 hover:to-purple-700 transition-all duration-300">
-                Add new Bugs
+              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-4 rounded-lg mt-4 hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
+              onClick={form}>
+                Add new Bug
               </button>
             </div>
           </div>
