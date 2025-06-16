@@ -63,7 +63,7 @@ const PostDetail = () => {
     <div className="relative rounded-2xl overflow-hidden border border-gray-700/50 shadow-xl mb-10">
       <div className="relative pt-[50%]">
         <img 
-          src={`http://localhost:3000${post.image}`} 
+          src={`${import.meta.env.VITE_API_URL}${post.image}`} 
           alt={post.title}
           className="absolute inset-0 w-full h-full object-cover"
         />

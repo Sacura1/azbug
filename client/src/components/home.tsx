@@ -107,7 +107,7 @@ const Home: React.FC = () => {
                 <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
                   <div className="relative pt-[60%] overflow-hidden">
                     <img 
-                      src={`http://localhost:3000${post.image}`} 
+                      src={`${import.meta.env.VITE_API_URL}${post.image}`} 
                       alt={post.title}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
