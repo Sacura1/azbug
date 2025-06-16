@@ -54,6 +54,8 @@ const BugReportingForm: React.FC = () => {
     const id = response.data.id;
     localStorage.setItem(`post${id}`,'true');
     console.log("Data sent successfully:", response.data);
+        console.log("Data:", response.data);
+
   } catch (error) {
     console.error("Error sending data:", error);
   }

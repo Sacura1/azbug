@@ -60,11 +60,12 @@ app.post('/submit', upload.single('issueImage'), async (req, res) => {
   console.log('Received data:', { title, solution, imagePath,username });
 
   try {
-    await pool.query(
+    const result = await pool.query(
       'INSERT INTO azbug (title, solution, image, username) VALUES ($1, $2, $3, $4)',
       [title, solution, imagePath,username]
     );
-    res.status(200).send('Post submitted successfully!');
+    const assertedId = result.rows[0].id;
+    res.status(200).json({ id: assertedId});
   } catch (error) {
     console.error(error);
     res.status(500).send('Database error');
