@@ -61,7 +61,7 @@ app.post('/submit', upload.single('issueImage'), async (req, res) => {
 
   try {
     const result = await pool.query(
-      'INSERT INTO azbug (title, solution, image, username) VALUES ($1, $2, $3, $4)',
+      'INSERT INTO azbug (title, solution, image, username) VALUES ($1, $2, $3, $4) RETURNING id',
       [title, solution, imagePath,username]
     );
     const assertedId = result.rows[0].id;
