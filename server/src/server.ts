@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 const __dirname = path.resolve();
 
 dotenv.config()
-
+console.log('Environment Variables:', process.env.DATABASE_URL);
 const { Pool } = pkg;
 const app = express();
 const PORT = 3000;
@@ -24,7 +24,6 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 app.use(cors(corsOptions));
-dotenv.config();
 
 
 const pool = new Pool({
@@ -71,6 +70,17 @@ app.post('/submit', upload.single('issueImage'), async (req, res) => {
     res.status(500).send('Database error');
   }
 });
+
+app.delete('/delete', async (req, res) => {
+    try {
+      console.log('Received delete request');
+      console.log('Environment Variables:', process.env.DATABASE_URL);
+    const re = await pool.query('DELETE FROM azbug')
+    res.status(200).send('All posts deleted successfully!');
+
+    } catch (error) {
+        console.error(error);}
+})
 
 
 app.get('/getPosts', async (req, res) => {

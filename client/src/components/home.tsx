@@ -25,8 +25,17 @@ const Home: React.FC = () => {
         navigate('/newbug')
     }
 
-    // Removed the edit variable from here; will check per post in the map below
-
+   function delet() {
+  axios.delete('http://localhost:3000/delete')
+    .then(res => {
+      console.log("done")
+      alert(res.data); // "All posts deleted successfully!"
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Failed to delete posts');
+    });
+}
 
 
 
@@ -96,6 +105,11 @@ const Home: React.FC = () => {
 
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <button onClick={delet}>
+            
+            DELETE
+          </button>
           {posts.map((post, index) => {
             const edit = localStorage.getItem(`post${post.id}`) === 'true';
             return (
