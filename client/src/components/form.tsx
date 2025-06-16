@@ -51,6 +51,8 @@ const BugReportingForm: React.FC = () => {
         "Content-Type": "multipart/form-data",
       },
     });
+    const id = response.data.id;
+    localStorage.setItem(`post${id}`,'true');
     console.log("Data sent successfully:", response.data);
   } catch (error) {
     console.error("Error sending data:", error);
