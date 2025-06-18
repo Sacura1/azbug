@@ -53,7 +53,7 @@ const Home: React.FC = () => {
         <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-gray-700/50 shadow-xl">
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-3">
-            <img className="w-16 h-16" src="./azbug.png" alt="" />
+            <img className="w-16 h-16" src="./azbug.svg" alt="" />
             </h1>
             <p className="text-gray-400 text-lg md:text-xl mb-6">
               Community-Driven Aztec Node Error Solutions

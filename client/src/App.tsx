@@ -8,8 +8,9 @@ import BugReportingForm from './components/form';
 function App() {
   return (
     <>
-      <Header />
       <Routes>
+        <Header />
+
         <Route path="/" element={<Home />} />
         <Route path="/post/:id" element={<PostDetail />} />
         <Route path="/newbug" element={<BugReportingForm />} />
