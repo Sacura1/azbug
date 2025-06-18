@@ -45,7 +45,7 @@ const Header: React.FC = () => {
 
           <div className="flex items-center space-x-4">
             <h1 className="text-white" >Azbug</h1>
-            <img className="w-11 h-11" src="./azbug.svg" alt="" />
+            <img className="w-11 h-11" src="/azbug.svg" alt="" />
             <button
               onClick={form}
               className="hidden md:block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
