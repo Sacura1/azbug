@@ -25,25 +25,13 @@ const Home: React.FC = () => {
         navigate('/newbug')
     }
 
-   function delet() {
-  axios.delete('http://localhost:3000/delete')
-    .then(res => {
-      console.log("done")
-      alert(res.data); // "All posts deleted successfully!"
-    })
-    .catch(err => {
-      console.error(err);
-      alert('Failed to delete posts');
-    });
-}
-
+   
 
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/getPosts`)
             .then(response => {
                 setPosts(response.data);
-                console.log("Fetched posts:", response.data);
                 
             })
             .catch(error => {
@@ -54,7 +42,6 @@ const Home: React.FC = () => {
     
 
 
-    console.log("Posts state:", posts);
 
  
 
@@ -106,12 +93,8 @@ const Home: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          <button onClick={delet}>
-            
-            DELETE
-          </button>
+          
           {posts.map((post, index) => {
-            const edit = localStorage.getItem(`post${post.id}`) === 'true';
             return (
               <Link 
                 to={`/post/${post.id}`} 
@@ -147,15 +130,7 @@ const Home: React.FC = () => {
                       
                       <span>{format(new Date(post.created),"MMMM d, yyy HH:mm")}</span>
                     </div>
-                      {edit && (
-                        <div className="flex gap 2 ">
-                          <button >
-                            edit
-
-                          </button>
-                          
-                        </div>
-                      )}
+                      
                   </div>
                 </div>
               </Link>

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 type Post = {
   title: string;
@@ -10,11 +11,30 @@ type Post = {
   solution: string;
   username: string;
   created: number;
+  id: number;
 };
 
 const PostDetail = () => {
   const { id } = useParams();
   const [post, setPost] = useState<Post | null>(null);
+
+  const navigate = useNavigate();
+  const redirect = () => {
+    navigate('/')}
+
+  function delet() {
+    const id = post?.id
+  axios.delete(`${import.meta.env.VITE_API_URL}/delete/${id}`)
+    .then(res => {
+      redirect();
+      alert(res.data); 
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Failed to delete posts');
+    });
+}
+
 
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_API_URL}/posts/${id}`)
@@ -23,6 +43,8 @@ const PostDetail = () => {
   }, [id]);
 
   if (!post) return <div>Loading...</div>;
+
+  const edit = localStorage.getItem(`post${post.id}`) === 'true';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
@@ -39,7 +61,14 @@ const PostDetail = () => {
       </Link>
     </div>
 
-    {/* Title */}
+    {edit && (
+                     <div className="flex gap 2 ">
+                       <button onClick={delet} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
+                    delete
+    
+           </button>
+                </div>
+                          )}
     <h1 className="text-center mt-28 text-4xl md:text-5xl font-bold mb-9 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-300">
       {post.title}
     </h1>

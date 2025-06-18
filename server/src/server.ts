@@ -7,7 +7,6 @@ import dotenv from 'dotenv';
 const __dirname = path.resolve();
 
 dotenv.config()
-console.log('Environment Variables:', process.env.DATABASE_URL);
 const { Pool } = pkg;
 const app = express();
 const PORT = 3000;
@@ -55,9 +54,7 @@ app.post('/submit', upload.single('issueImage'), async (req, res) => {
   const  solution  = req.body.solution;
     const  username  = req.body.username;
 
-  console.log('Received body:', req.body);
   const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
-  console.log('Received data:', { title, solution, imagePath,username });
 
   try {
     const result = await pool.query(
@@ -72,13 +69,12 @@ app.post('/submit', upload.single('issueImage'), async (req, res) => {
   }
 });
 
-app.delete('/delete', async (req, res) => {
+app.delete('/delete/:id', async (req, res) => {
+  const { id } = req.params;
     try {
       console.log('Received delete request');
-      console.log('Environment Variables:', process.env.DATABASE_URL);
-    const re = await pool.query('DELETE FROM azbug')
-    res.status(200).send('All posts deleted successfully!');
-
+    const re = await pool.query('DELETE FROM azbug WHERE id = $1', [id]);
+    res.status(200).send('post deleted successfully!');
     } catch (error) {
         console.error(error);}
 })
@@ -87,7 +83,6 @@ app.delete('/delete', async (req, res) => {
 app.get('/getPosts', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM azbug');
-    console.log('Fetched posts:', result.rows);
     res.status(200).json(result.rows);
   } catch (error) {
     console.error('Error fetching posts:', error);
